@@ -51,6 +51,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+Ok, now in your client, you just need to access _<YOUR API ADDRESS>/api/auth and to see the magic happens.
+
+
 **_SPA (Single Page Application)_**
 
 Want to use a SPA?
