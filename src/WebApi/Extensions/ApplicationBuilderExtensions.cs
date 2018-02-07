@@ -20,6 +20,10 @@ namespace Nibo.Framework.WebApi.Extensions
                 }
             });
 
+            app.UseMvcWithDefaultRoute();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             return app;
         }
     }
