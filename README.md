@@ -5,7 +5,8 @@ A collection of useful implementations to make easy to deal with a few things =)
 **USAGE:**
 
 **_Authentication_**
-Implement interface _IAuthOptions_
+
+Create a new _class_ that implements interface _IAuthOptions_
 
 ```csharp
 public interface IAuthOptions
@@ -18,7 +19,7 @@ public interface IAuthOptions
 }
 ```
 
-The, in the _Startup.cs_ do as follow:
+In the _Startup.cs_, do as follow:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -31,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Or, if you don't want to implement your own class, just do like this:
+Or, if you don't want to implement your own class, just use our _Builder_:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
