@@ -66,4 +66,4 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Simple as it should be, it will read the files from _wwwroot_, in your WebApi Project directory.
+Simple as it should be, it will read the files from _wwwroot_ in your WebApi Project directory.
