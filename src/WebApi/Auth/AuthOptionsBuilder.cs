@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace Nibo.Framework.WebApi.Auth
 {
     public interface IAuthOptionsBuilderClient : IAuthOptionsBuilder
@@ -37,14 +41,37 @@ namespace Nibo.Framework.WebApi.Auth
 
         public IAuthOptions Build()
         {
-            if (string.IsNullOrWhiteSpace(this.clientId) ||
-                string.IsNullOrWhiteSpace(this.clientSecret) ||
-                string.IsNullOrWhiteSpace(this.jwtPassword) ||
-                string.IsNullOrWhiteSpace(this.passportUrl) ||
-                string.IsNullOrWhiteSpace(this.returnUrl))
+            var errors = new List<string>(5);
+            if (string.IsNullOrWhiteSpace(this.clientId))
             {
-                throw new AuthOptionsInvalidException();
+                errors.Add("clientId");
             }
+
+            if (string.IsNullOrWhiteSpace(this.clientSecret))
+            {
+                errors.Add("clientSecret");
+            }
+
+            if (string.IsNullOrWhiteSpace(this.jwtPassword))
+            {
+                errors.Add("jwtPassword");
+            }
+
+            if (string.IsNullOrWhiteSpace(this.passportUrl))
+            {
+                errors.Add("passportUrl");
+            }
+
+            if (string.IsNullOrWhiteSpace(this.returnUrl))
+            {
+                errors.Add("returnUrl");
+            }
+
+            if (errors.Any())
+            {
+                throw new AuthOptionsInvalidException(errors);
+            }
+
             return new AuthOptions(this.clientId, this.clientSecret, this.jwtPassword, this.passportUrl, this.returnUrl);
         }
 
