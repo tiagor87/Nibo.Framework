@@ -56,7 +56,7 @@ namespace Nibo.Framework.WebApi.Extensions
             return services;
         }
 
-        public static IServiceCollection AddNiboAuthentication(this IServiceCollection services, Func<AuthOptionsBuilder, IAuthOptions> configOptions)
+        public static IServiceCollection AddOAuthAuthentication(this IServiceCollection services, Func<AuthOptionsBuilder, IAuthOptions> configOptions)
         {
             var builder = new AuthOptionsBuilder();
             return services.AddOAuthAuthentication(configOptions(builder));
