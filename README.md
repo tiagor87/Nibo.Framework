@@ -11,11 +11,13 @@ Create a new _class_ that implements interface _IAuthOptions_
 ```csharp
 public interface IAuthOptions
 {
-    string PassportUrl { get; }
-    string JwtPassword { get; }
+    string ChallengeScheme { get; }
+    string AuthorizationEndpoint { get; }
+    string TokenEndpoint { get; }
+    string UserInformationEndpoint { get; }
     string ClientId { get; }
     string ClientSecret { get; }
-    string ReturnUrl { get; }
+    Action<ClaimActionCollection> MapClaims { get; }
 }
 ```
 
@@ -26,7 +28,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     ...
 
-    services.AddNiboAuthentication(new MyAuthOptionsImplementation());
+    services.AddOAuthAuthentication(new MyAuthOptionsImplementation());
 
     ...
 }
@@ -40,18 +42,12 @@ public void ConfigureServices(IServiceCollection services)
     services
         .AddNiboAuthentication(options =>
             options
-                .AsClient(this.Configuration.GetValue<string>("Auth:ClientId"))
-                .WithSecret(this.Configuration.GetValue<string>("Auth:ClientSecret"))
-                .And()
-                .AuthenticateOn(this.Configuration.GetValue<string>("Auth:PassportUrl"))
-                .WithJwtPassword(this.Configuration.GetValue<string>("Auth:JwtPassword"))
-                .And()
-                .ReturnToUrl(this.Configuration.GetValue<string>("Auth:ReturnUrl"))
+                ...
                 .Build());
 }
 ```
 
-Ok, now in your client, you just need to access *_YOUR API ADDRESS/api/auth_* and to see the magic happens.
+Ok, now in your client, you just need to access *_YOUR API ADDRESS/api/auth_* to see the magic happens.
 
 
 **_SPA (Single Page Application)_**
